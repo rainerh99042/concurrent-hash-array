@@ -61,3 +61,10 @@ application-level consistency reasoning.
 Methods: `get(key)`, `getEntry(key)`, `set(key, value)`,
 `compareAndSet(key, expected, value)`, `delete(key)`. Properties: `size`,
 `capacity`.
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
